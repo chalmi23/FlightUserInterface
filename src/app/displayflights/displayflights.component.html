@@ -1,0 +1,50 @@
+<header>
+  <nav class="navbar">
+    <ul class="navbar-menu">
+      <li><a routerLink="/login-component" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a></li>
+      <li><a (click)="navigateWithToken('/displayflights-component')">Wyświetl loty</a></li>
+      <li><a (click)="navigateWithToken('/addnewflight-component')">Dodaj lot</a></li>
+      <li><a (click)="navigateWithToken('/editflight-component')">Edytuj lot</a></li>        
+    </ul>
+  </nav>
+</header>
+
+<button (click)="getFlights()">Pobierz loty</button>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Numer lotu</th>
+        <th>Data wylotu</th>
+        <th>Miejsce odlotu</th>
+        <th>Miejsce przylotu</th>
+        <th>Typ samolotu</th>
+    </tr>
+      @if (flights.length > 0) {
+
+        @for (flight of flights; track flight) {
+            <tr>
+                <td>{{ flight.id }}</td>
+                <td>{{ flight.flightNumber }}</td>
+                <td>{{ flight.departureDate }}</td> 
+                <td>{{ flight.departureLocation }}</td> 
+                <td>{{ flight.arrivalLocation }}</td> 
+                <td>{{ flight.aircraftType }}</td> 
+            </tr>          
+        } 
+}
+</table>
+
+@if(displayFlightError == true) {
+  <div class="alert-container">
+    <ngb-alert  [type]="alertType" [dismissible]="false">
+      {{ alertMessage }}
+    </ngb-alert>
+  </div>
+}
+
+
+
+
+
+  

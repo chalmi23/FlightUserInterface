@@ -1,0 +1,32 @@
+<header>
+    <nav class="navbar">
+      <div class="container">
+        <ul class="navbar-menu">
+          <li><a routerLink="/login-component" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a></li>
+          <li><a routerLink="/register-component" routerLinkActive="active" ariaCurrentWhenActive="page">Rejestracja</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  
+  <div class="container">
+    <form (ngSubmit)="onSubmit()">
+      <div>
+        <label for="username">nazwa użytkownika:</label>
+        <input type="text" id="username" name="username" [(ngModel)]="user.username" required>
+      </div>
+      <div>
+        <label for="password">hasło:</label>
+        <input type="password" id="password" name="password" [(ngModel)]="user.password" required>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  @if(showAlert) {
+    <div class="alert-container">
+      <ngb-alert  [type]="alertType" [dismissible]="false" (close)="showAlert = false">
+        {{ alertMessage }}
+      </ngb-alert>
+    </div>
+  }

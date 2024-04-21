@@ -1,0 +1,102 @@
+<header>
+  <nav class="navbar">
+    <ul class="navbar-menu">
+      <li><a routerLink="/login-component" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a></li>
+      <li><a (click)="navigateWithToken('/displayflights-component')">Wyświetl loty</a></li>
+      <li><a (click)="navigateWithToken('/addnewflight-component')">Dodaj lot</a></li>
+      <li><a (click)="navigateWithToken('/editflight-component')">Edytuj lot</a></li>            
+    </ul>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Szukaj lotu po ID</h2>
+  <form (ngSubmit)="getFlightById()" class="search-form">
+    <div>
+      <label for="flightId">ID lotu: </label>
+      <input type="number" id="flightId" [(ngModel)]="flightId" name="flightId" required>
+    </div>
+    <button type="submit" class="search-button">Szukaj</button>
+  </form>
+</div>
+
+<div class="center-table">
+  <table class="flight-table">
+    <tr>
+        <th>ID</th>
+        <th>Numer lotu</th>
+        <th>Data wylotu</th>
+        <th>Miejsce odlotu</th>
+        <th>Miejsce przylotu</th>
+        <th>Typ samolotu</th>
+    </tr>
+    @if(flight)
+    {
+      <tr>
+        <td>{{ flight.id }}</td>
+        <td>{{ flight.flightNumber }}</td>
+        <td>{{ flight.departureDate }}</td> 
+        <td>{{ flight.departureLocation }}</td> 
+        <td>{{ flight.arrivalLocation }}</td> 
+        <td>{{ flight.aircraftType }}</td> 
+    </tr>  
+    }
+  </table>
+</div>
+
+<div class="form-container">
+  <h2>Edytuj informacje o locie</h2>
+  <form (ngSubmit)="editFlight()" class="edit-form">
+    <div>
+      <label for="flightIdEdit">ID lotu:</label>
+      <input type="text" id="flightIdEdit" [(ngModel)]="editedFlightData.id" name="flightIdEdit" required>
+    </div>
+    <div>
+      <label for="flightNumber">Numer lotu:</label>
+      <input type="text" id="flightNumber" [(ngModel)]="editedFlightData.flightNumber" name="flightNumber" required>
+    </div>
+    <div>
+      <label for="departureDate">Data wylotu:</label>
+      <input type="date" id="departureDate" [(ngModel)]="editedFlightData.departureDate" name="departureDate" required>
+    </div>
+    <div>
+      <label for="departureLocation">Miejsce odlotu:</label>
+      <input type="text" id="departureLocation" [(ngModel)]="editedFlightData.departureLocation" name="departureLocation" required>
+    </div>
+    <div>
+      <label for="arrivalLocation">Miejsce przylotu:</label>
+      <input type="text" id="arrivalLocation" [(ngModel)]="editedFlightData.arrivalLocation" name="arrivalLocation" required>
+    </div>
+    <div>
+      <label for="aircraftType">Typ samolotu:</label>
+      <input type="text" id="aircraftType" [(ngModel)]="editedFlightData.aircraftType" name="aircraftType" required>
+    </div>
+    <button type="submit" class="edit-button">Edytuj lot</button>
+  </form>
+</div>
+
+<div class="form-container">
+  <h2>Usuń lot</h2>
+  <form (ngSubmit)="deleteFlight()" class="delete-form">
+    <div>
+      <label for="flightIdDelete">ID lotu:</label>
+      <input type="text" id="flightIdDelete" [(ngModel)]="flightIdToDelete" name="flightIdDelete" required>
+    </div>
+    <button type="submit" class="delete-button">Usuń lot</button>
+  </form>
+</div>
+
+@if(editFlightError == true || editFlightSuccess == true) {
+  <div class="alert-container">
+    <ngb-alert  [type]="alertType" [dismissible]="false">
+      {{ alertMessage }}
+    </ngb-alert>
+  </div>
+}
+
+
+
+
+
+
+  

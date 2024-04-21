@@ -1,0 +1,51 @@
+<header>
+  <nav class="navbar">
+    <ul class="navbar-menu">
+      <li><a routerLink="/login-component" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a></li>
+      <li><a (click)="navigateWithToken('/displayflights-component')">Wyświetl loty</a></li>
+      <li><a (click)="navigateWithToken('/addnewflight-component')">Dodaj lot</a></li>
+      <li><a (click)="navigateWithToken('/editflight-component')">Edytuj lot</a></li>            
+    </ul>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="form-container">
+    <h2>Dodaj nowy lot</h2>
+    <form (ngSubmit)="addNewFlight()">
+      <div>
+        <label>Numer lotu:</label>
+        <input type="text" [(ngModel)]="newFlight.flightNumber" name="flightNumber" required>
+      </div>
+      <div>
+        <label>Data odlotu:</label>
+        <input type="date" [(ngModel)]="newFlight.departureDate" name="departureDate" required>
+      </div>
+      <div>
+        <label>Lokalizacja odlotu:</label>
+        <input type="text" [(ngModel)]="newFlight.departureLocation" name="departureLocation" required>
+      </div>
+      <div>
+        <label>Lokalizacja przylotu:</label>
+        <input type="text" [(ngModel)]="newFlight.arrivalLocation" name="arrivalLocation" required>
+      </div>
+      <div>
+        <label>Typ samolotu:</label>
+        <input type="text" [(ngModel)]="newFlight.aircraftType" name="aircraftType" required>
+      </div>
+      <button type="submit">Dodaj lot</button>
+
+      @if(addFlightSuccess == true || addFlightError == true) {
+        <div class="alert-container">
+          <ngb-alert  [type]="alertType" [dismissible]="false">
+            {{ alertMessage }}
+          </ngb-alert>
+        </div>
+      }
+    </form>
+  </div>
+</div>
+
+
+
+  
